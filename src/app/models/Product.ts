@@ -11,14 +11,14 @@ export const Product = model('Product', new Schema({
     },
     imagePath: {
         type: String,
-        required: true,
+        required: false,
     },
     ingredients: {
         required: true,
         type: [{
             icon:{
                 type: String,
-                required: true,
+                required: false,
             },
             name: {
                 type: String,
@@ -26,7 +26,7 @@ export const Product = model('Product', new Schema({
             }
         }]
     },
-    categoty: {
+    category: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'Category'
