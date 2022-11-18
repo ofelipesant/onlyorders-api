@@ -3,13 +3,20 @@ import { Order } from '../../models/Order'
 
 export async function changeOrderStatus(req: Request, res: Response) {
     try{
-        const orders = await Order.find()
-            .sort({createdAt: 1})
-            .populate('products.product')
-        res.status(200).json(orders)
+        const { id } = req.params
+        const { status } = req.body
+
+        if(!['WAITING', 'IN_PRODUCTION', 'DONE'].includes(status)){
+            return res.status(400).json({
+                error: 'Status should be WAITING, IN_PRODUCTION or DONE'
+            })
+        }
+
+        await Order.findByIdAndUpdate(id, { status })
+        res.sendStatus(204)
+
     } catch(error){
         console.error(error)
         res.sendStatus(500)
     }
-
 }
