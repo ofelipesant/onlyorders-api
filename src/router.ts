@@ -24,21 +24,17 @@ const upload = multer({
     })
 })
 
-// List Categories
+// Categories
 router.get('/categories', listCategories)
-//Create Category
 router.post('/categories', createCategory)
-//List Products
+
+//Products
 router.get('/products', listProducts)
-//Create Product
 router.post('/products', upload.single('image'), createProduct)
-//Get Product by Category
 router.get('/categories/:id/products', listProductsByCategory)
-//List Orders
+
+//Orders
 router.get('/orders', listOrders)
-//Create Order
 router.post('/orders', createOrder)
-//Change Order Status
 router.patch('/orders/:id', changeOrderStatus)
-//Delete/cancel Order
 router.delete('/orders/:id', deleteOrder)
